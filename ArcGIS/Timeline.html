@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+    <title>ArcGIS Developer Guide: Hurricane locations before or after 1977</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18//esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.18//"></script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <script>
+      require([
+        "esri/config",
+        "esri/WebMap",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer",
+        "esri/widgets/Legend",
+        "esri/widgets/Expand"
+      ], function (esriConfig,WebMap, MapView, FeatureLayer, Legend, Expand) {
+
+        esriConfig.apiKey = "YOUR-API-KEY";
+
+        const colors = [ "#54bebe", "#dedad2", "#c80064" ];
+        const renderer = {
+          type: "simple",
+          label: "Observed hurricane location",
+          symbol: {
+            type: "simple-marker",
+            size: 4,
+            outline: null
+          },
+
+          visualVariables: [{
+            type: "color",
+            field: "ISO_time",
+            legendOptions: {
+              title: "Before and after October 7"
+            },
+            stops: [
+              { value: new Date(2020, 10, 7).getTime(), color: colors[0], label: "October 7" },
+              { value: new Date(2020, 4, 1).getTime(), color: colors[1], label: "April 1" },
+              { value: new Date(2020, 12, 31).getTime(), color: colors[2], label: "December 31" }
+            ]
+          }]
+
+        };
+
+
+        // ISO_time
+
+        const layer = new FeatureLayer({
+          title: "Prediction of the spread of Vespa mandarinia",
+          portalItem: {
+            id: "89c3a1cc5e20458ebcecbf794eaf7935"
+          },
+          renderer: renderer,
+          // definitionExpression: "Season = 2013"
+        });
+
+        const map = new WebMap({
+          basemap: {
+            portalItem: {
+              id: "3967a92f547341e28636a8ac159666a3"
+            }
+          },
+          layers: [ layer ]
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: map,
+          scale: 136195673,
+          constraints: {
+            snapToZoom: false,
+            rotationEnabled: false
+          }
+        });
+
+        view.ui.add(new Expand({
+          content: new Legend({
+            view: view
+          }),
+          view: view,
+          expanded: true
+        }), "top-left");
+
+        // Editor widget
+        const editor = new Editor({
+          view: view
+        });
+        // Add widget to the view
+        view.ui.add(editor, "top-right");
+        
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>

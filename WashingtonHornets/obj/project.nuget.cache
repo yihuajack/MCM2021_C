@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "TSvS0ox5fwXXVXK/O1Txal98UiaMbc9TxNK0yWdvYh7vZEdXiWqpc3SeHJiWj4stc15OKWy+kIV4CFpY9Gh2bQ==",
+  "success": true,
+  "projectFilePath": "D:\\Documents\\GitHub\\MCM2021_C\\WashingtonHornets\\WashingtonHornets.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Yihua\\.nuget\\packages\\esri.arcgisruntime\\100.10.0\\esri.arcgisruntime.100.10.0.nupkg.sha512",
+    "C:\\Users\\Yihua\\.nuget\\packages\\esri.arcgisruntime.runtimes.win\\100.10.0\\esri.arcgisruntime.runtimes.win.100.10.0.nupkg.sha512",
+    "C:\\Users\\Yihua\\.nuget\\packages\\esri.arcgisruntime.wpf\\100.10.0\\esri.arcgisruntime.wpf.100.10.0.nupkg.sha512"
+  ],
+  "logs": []
+}
